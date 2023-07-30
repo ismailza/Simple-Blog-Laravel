@@ -7,7 +7,9 @@ use App\Http\Requests\CreatePostRequest;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Redirect;
 

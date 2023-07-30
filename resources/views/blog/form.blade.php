@@ -47,6 +47,10 @@
   </div>
   <div class="d-flex justify-content-center">
     <button type="submit" class="btn btn-{{ $btnColor }} m-2">{{ $btnName }}</button>
-    <button type="reset" class="btn btn-secondary m-2">Annuler</button>
+    @if (request()->route()->getName() === 'blog.edit')
+      <a href="{{ route('blog.show', ['slug'=> $post->slug, 'post'=> $post->id]) }}" class="btn btn-secondary m-2">Annuler</a>
+    @else
+      <button type="reset" class="btn btn-secondary m-2">Annuler</button>
+    @endif
   </div>
 </form>

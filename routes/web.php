@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -20,6 +21,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/login', [AuthController::class, 'login'])->name( 'auth.login')->middleware('guest');
+Route::delete('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+Route::post('/login', [AuthController::class, 'authentificate']);
+
 Route::prefix('/blog')->name('blog.')->controller(PostController::class)->group(function () {
 
     // Route::get('/', [PostController::class, 'index'])->name('index');
@@ -30,10 +35,10 @@ Route::prefix('/blog')->name('blog.')->controller(PostController::class)->group(
         'slug' => '[a-z0-9\-]+'
     ])->name('show');
 
-    Route::get('/create', 'create')->name('create');
+    Route::get('/create', 'create')->name('create')->middleware('auth');
     Route::post('/create', 'store');
 
-    Route::get('/{post}/edit', 'edit')->name('edit');
+    Route::get('/{post}/edit', 'edit')->name('edit')->middleware('auth');;
     Route::post('/{post}/edit', 'update');
 
     Route::get('/{category}/category', 'category')->name('category');

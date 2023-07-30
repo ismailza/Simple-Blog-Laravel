@@ -11,7 +11,7 @@
     $routeName = request()->route();
     $categories = App\Models\Category::select('id','name')->get();
   @endphp
-  <nav class="navbar navbar-expand-lg bg-info">
+  <nav class="navbar navbar-expand-lg bg-info mb-2">
     <div class="container-fluid">
       <a class="navbar-brand" href="{{ route('blog.index') }}">Blog</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +34,30 @@
               @endforelse
             </ul>
           </li>
+          @auth
           <li class="nav-item">
             <a @class(['nav-link', 'active' => $routeName->getName() === 'blog.create']) href="{{ route('blog.create') }}">Ajouter</a>
           </li>
+          @endauth
+        </ul>
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+          @auth
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+                {{ Illuminate\Support\Facades\Auth::user()->name }}
+              </a>
+              <ul class="dropdown-menu">
+                <form action="{{ route('auth.logout') }}" method="post">
+                  @method("delete")
+                  @csrf
+                  <button class="nav-link" type="submit">Se déconnecter</button>
+                </form>
+              </ul>
+            </li>
+          @endauth
+          @guest
+            <li class="nav-item"><a href="{{ route('auth.login') }}" class="nav-link">Se connecter</a></li>
+          @endguest
         </ul>
       </div>
     </div>

@@ -18,10 +18,12 @@
       @endforeach
     </div>
     @endif
+    @auth
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a href="{{ route('blog.edit', ['post'=>$post])}}" class="btn btn-warning me-md-2" type="button">Update</a>
       <a class="btn btn-danger" type="button">Delete</a>
     </div>
+    @endauth
   </article>
   <a href="{{ route('blog.index') }}" class="btn btn-primary float-end mt-2">Retour</a>
 
