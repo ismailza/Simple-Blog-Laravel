@@ -35,4 +35,6 @@ Route::prefix('/blog')->name('blog.')->controller(PostController::class)->group(
 
     Route::get('/{post}/edit', 'edit')->name('edit');
     Route::post('/{post}/edit', 'update');
+
+    Route::get('/{category}/category', 'category')->name('category');
 });

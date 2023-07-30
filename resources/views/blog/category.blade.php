@@ -1,11 +1,11 @@
 @extends('layout.layout')
 
-@section('title', 'Acceuil')
+@section('title', $category->name)
 
 @section('content')
 
-  <h1>Bienvenue sur mon blog</h1>
-  <h2 class="text-center">Mes articles</h2>
+  <h1>Les article du catégorie "{{ $category->name }}"</h1>
+
   <hr>
   <div class="card-container row">
   @forelse($posts as $post)

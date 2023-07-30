@@ -61,4 +61,11 @@ class PostController extends Controller
         ])->with('success', "L'article a été modifié avec succès");
     }
 
+    public function category (Category $category) {
+        return view('blog.category', [
+            'category' => $category,
+            'posts' => Category::with('posts')->find($category->id)->posts()->paginate(5)
+        ]);
+    }
+
 }

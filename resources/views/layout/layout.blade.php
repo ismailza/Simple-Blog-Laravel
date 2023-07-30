@@ -9,6 +9,7 @@
 <body>
   @php
     $routeName = request()->route();
+    $categories = App\Models\Category::select('id','name')->get();
   @endphp
   <nav class="navbar navbar-expand-lg bg-info">
     <div class="container-fluid">
@@ -20,6 +21,18 @@
         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a @class(['nav-link', 'active' => $routeName->getName() === 'blog.index']) href="{{ route('blog.index') }}">Accueil</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+              Catégories
+            </a>
+            <ul class="dropdown-menu">
+              @forelse ($categories as $category)
+                <li><a class="dropdown-item" href="{{ route('blog.category',['category'=> $category->id]) }}">{{ $category->name }}</a></li>
+              @empty
+                <li class="nav-link disabled">Pas de catégorie</li>
+              @endforelse
+            </ul>
           </li>
           <li class="nav-item">
             <a @class(['nav-link', 'active' => $routeName->getName() === 'blog.create']) href="{{ route('blog.create') }}">Ajouter</a>
@@ -44,6 +57,7 @@
     @yield('content')
   </div>
   <script src="{{ asset('assets/bootstrap') }}/js/bootstrap.min.js"></script>
+  <script src="{{ asset('assets/bootstrap') }}/js/bootstrap.bundle.min.js"></script>
   <script src="{{ asset('assets/jquery') }}/jquery-3.7.0.min.js"></script>
 </body>
 </html>
