@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class CreatePostRequest extends FormRequest
+class PostRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,7 +29,8 @@ class CreatePostRequest extends FormRequest
             'slug' => ['required','min:4','regex:/^[a-z0-9\-]+$/', Rule::unique('posts')->ignore($this->route()->parameter('post'))],
             'content' => ['required','min:25'],
             'category_id' => ['required', 'exists:categories,id'],
-            'tags' => ['array', 'exists:tags,id']
+            'tags' => ['array', 'exists:tags,id'],
+            'image' => ['image', 'max:2000']
         ];
     }
 

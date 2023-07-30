@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @mixin IdeHelperPost
@@ -17,6 +18,7 @@ class Post extends Model
         'slug',
         'content',
         'category_id',
+        'image',
     ];
 
     public function category () {
@@ -25,5 +27,9 @@ class Post extends Model
 
     public function tags () {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function imageUrl () {
+        return Storage::disk('public')->url($this->image);
     }
 }

@@ -8,6 +8,9 @@
     <h1>{{ $post->title }}</h1>
     <h5 class="text-body-secondary">{{ $post->slug }}</h5>
     <h6 class="text-body-dark">{{ $post->category->name }}</h6>
+    @if ($post->image)
+      <img style="width: 100%; max-height: 200px; object-fit: cover;" src="{{ $post->imageUrl() }}" alt="Article image">
+    @endif
     <div>
       <p>{{ $post->content }}</p>
     </div>
@@ -25,6 +28,5 @@
     </div>
     @endauth
   </article>
-  <a href="{{ route('blog.index') }}" class="btn btn-primary float-end mt-2">Retour</a>
 
 @endsection

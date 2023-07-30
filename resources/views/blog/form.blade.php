@@ -1,4 +1,4 @@
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
   @csrf
   <div class="mb-3">
     <label for="title" class="form-label">Title</label>
@@ -11,6 +11,13 @@
     <label for="slug" class="form-label">Slug</label>
     <input type="text" class="form-control" id="slug" name="slug" value="{{ old('slug', $post->slug) }}" placeholder="Article slug">
     @error('slug')
+      {{ $message }}
+    @enderror
+  </div>
+  <div class="mb-3">
+    <label for="image" class="form-label">Image</label>
+    <input type="file" class="form-control" id="image" name="image" placeholder="Article image">
+    @error('image')
       {{ $message }}
     @enderror
   </div>
