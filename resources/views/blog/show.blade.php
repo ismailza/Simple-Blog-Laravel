@@ -23,8 +23,12 @@
     @endif
     @auth
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a href="{{ route('blog.edit', ['post'=>$post])}}" class="btn btn-warning me-md-2" type="button">Update</a>
-      <a class="btn btn-danger" type="button">Delete</a>
+      <a href="{{ route('blog.edit', ['post'=>$post])}}" class="btn btn-warning btn-sm me-md-2" type="button">Update</a>
+      <form action="{{ route('blog.destroy', $post) }}" method="post">
+        @csrf
+        @method('delete')
+        <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+      </form>
     </div>
     @endauth
   </article>

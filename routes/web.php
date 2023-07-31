@@ -42,4 +42,6 @@ Route::prefix('/blog')->name('blog.')->controller(PostController::class)->group(
     Route::post('/{post}/edit', 'update');
 
     Route::get('/{category}/category', 'category')->name('category');
+
+    Route::delete('/{post}/destroy', 'destroy')->name('destroy');
 });
